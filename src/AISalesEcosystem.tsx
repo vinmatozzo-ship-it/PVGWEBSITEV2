@@ -78,7 +78,7 @@ function FeatureCard({ title, description, image, index }: FeatureCardProps) {
           </motion.div>
 
           <motion.div variants={itemVariants} className="w-full lg:w-1/2 flex flex-col gap-6">
-            <h2 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tighter leading-tight">
+            <h2 className="text-3xl md:text-5xl font-black text-paradigm-blue tracking-tighter leading-tight">
               {title}
             </h2>
             <p 
@@ -107,7 +107,7 @@ export function AISalesEcosystem({ setIsContactModalOpen }: { setIsContactModalO
           Powered by Paradigm
         </motion.div>
         
-        <motion.h1 variants={itemVariants} className="text-6xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-8 text-gray-900">
+        <motion.h1 variants={itemVariants} className="text-6xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-8 text-paradigm-blue">
           <span className="text-blue-600">SHIFT</span> Sales<br />Accelerator
         </motion.h1>
         
@@ -245,7 +245,7 @@ export function AISalesEcosystem({ setIsContactModalOpen }: { setIsContactModalO
       >
         <div className="max-w-7xl mx-auto">
           <motion.div variants={itemVariants} className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tighter mb-4">Onboarding Process</h2>
+            <h2 className="text-4xl md:text-5xl font-black text-paradigm-blue tracking-tighter mb-4">Onboarding Process</h2>
             <p className="text-gray-500 font-medium text-lg">Your journey to supercharged sales in 6 simple steps.</p>
           </motion.div>
 
@@ -289,7 +289,7 @@ export function AISalesEcosystem({ setIsContactModalOpen }: { setIsContactModalO
       >
         <div className="max-w-7xl mx-auto">
           <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tighter mb-4">Investment & Support</h2>
+            <h2 className="text-4xl md:text-5xl font-black text-paradigm-blue tracking-tighter mb-4">Investment & Support</h2>
             <p className="text-gray-500 font-medium text-lg">Transparent pricing for enterprise-grade solutions.</p>
           </motion.div>
 
@@ -334,7 +334,7 @@ export function AISalesEcosystem({ setIsContactModalOpen }: { setIsContactModalO
         />
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <motion.div variants={itemVariants}>
-            <h2 className="text-5xl md:text-7xl font-black text-gray-900 mb-8 tracking-tighter leading-none">
+            <h2 className="text-5xl md:text-7xl font-black text-paradigm-blue mb-8 tracking-tighter leading-none">
               Ready to automate your revenue?
             </h2>
             <button 

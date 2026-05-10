@@ -162,7 +162,7 @@ function MediaCard({ item }: { item: MediaItem }) {
           </div>
         )}
         
-        <h2 className="text-2xl md:text-3xl font-black mb-6 tracking-tight leading-tight text-gray-900 group-hover:text-blue-600 transition-colors">
+        <h2 className="text-2xl md:text-3xl font-black mb-6 tracking-tight leading-tight text-paradigm-blue group-hover:text-blue-600 transition-colors">
           {item.title}
         </h2>
 
@@ -199,7 +199,7 @@ export default function MediaAndArticles() {
           </motion.div>
           <motion.h1 
             variants={fadeIn}
-            className="text-5xl md:text-7xl font-black tracking-tighter leading-none mb-8 text-gray-900"
+            className="text-5xl md:text-7xl font-black tracking-tighter leading-none mb-8 text-paradigm-blue"
           >
             Media and Articles
           </motion.h1>

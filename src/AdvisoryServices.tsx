@@ -217,7 +217,7 @@ export function AdvisoryServices({ setIsContactModalOpen }: { setIsContactModalO
           <motion.div variants={cardVariants} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-[10px] font-black text-blue-600 tracking-[0.2em] uppercase mb-8">
             Consulting Services
           </motion.div>
-          <motion.h1 variants={cardVariants} className="text-6xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-10 text-gray-900">
+          <motion.h1 variants={cardVariants} className="text-6xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-10 text-paradigm-blue">
             Advisory Services
           </motion.h1>
           <motion.p variants={cardVariants} className="text-xl md:text-2xl text-gray-500 leading-relaxed font-medium">
@@ -256,7 +256,7 @@ export function AdvisoryServices({ setIsContactModalOpen }: { setIsContactModalO
         className="py-32 px-6 bg-[#fafafa]"
       >
         <div className="max-w-4xl mx-auto text-center">
-          <motion.h2 variants={cardVariants} className="text-4xl md:text-6xl font-black text-gray-900 mb-10 tracking-tighter leading-tight">
+          <motion.h2 variants={cardVariants} className="text-4xl md:text-6xl font-black text-paradigm-blue mb-10 tracking-tighter leading-tight">
             Ready to evolve your<br />strategic operations?
           </motion.h2>
           <motion.button 

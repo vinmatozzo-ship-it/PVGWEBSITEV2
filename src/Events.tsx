@@ -224,7 +224,7 @@ function FeaturedEventCard() {
           </div>
 
           <div className="mb-8">
-            <h2 className="text-3xl md:text-5xl font-black tracking-tighter leading-none mb-4 text-gray-900">
+            <h2 className="text-3xl md:text-5xl font-black tracking-tighter leading-none mb-4 text-paradigm-blue">
               BREAKING SILOS VIRTUAL EVENT 2023
             </h2>
             <p className="text-xl font-bold text-gray-400 tracking-tight">
@@ -344,7 +344,7 @@ function HorizontalEventCard({
 
           <motion.h2 
             variants={titleSlideUp}
-            className="text-3xl md:text-5xl font-black tracking-tighter leading-none mb-6 text-gray-900 group-hover:text-blue-600 transition-colors"
+            className="text-3xl md:text-5xl font-black tracking-tighter leading-none mb-6 text-paradigm-blue group-hover:text-blue-600 transition-colors"
           >
             {title}
           </motion.h2>

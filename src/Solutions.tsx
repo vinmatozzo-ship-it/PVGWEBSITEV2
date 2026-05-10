@@ -30,7 +30,7 @@ export function Solutions() {
 
             {/* Right Side: Text */}
             <div className="flex flex-col gap-6">
-              <h1 className="text-4xl md:text-6xl font-black tracking-tighter text-balance">
+              <h1 className="text-4xl md:text-6xl font-black tracking-tighter text-balance text-paradigm-blue">
                 Welcome to Paradigm Venture Group
               </h1>
               <div className="text-xl text-gray-600 max-w-2xl leading-relaxed font-medium flex flex-col gap-6">
@@ -48,7 +48,7 @@ export function Solutions() {
           </div>
           
           <div className="pt-16 pb-8">
-            <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-center">
+            <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-center text-paradigm-blue">
               Solutions
             </h2>
           </div>
@@ -62,8 +62,8 @@ export function Solutions() {
           >
             {/* Left Side: Text */}
             <div className="flex flex-col gap-6">
-              <h3 className="text-3xl md:text-5xl font-bold tracking-tighter text-balance">
-                Custom Application Builder
+              <h3 className="text-3xl md:text-5xl font-bold tracking-tighter text-balance text-paradigm-blue">
+                Build a Custom App
               </h3>
               <p className="text-xl text-gray-600 leading-relaxed font-medium">
                 Build exactly what your business needs to succeed in weeks.
@@ -74,7 +74,7 @@ export function Solutions() {
             <div className="w-full flex justify-center items-center">
               <img 
                 src="/cubes.png" 
-                alt="Custom Application Builder" 
+                alt="Build a Custom App" 
                 className="w-full h-auto max-w-[260px] object-contain mix-blend-multiply"
               />
             </div>

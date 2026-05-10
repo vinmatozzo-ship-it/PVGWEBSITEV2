@@ -55,8 +55,8 @@ export function CustomAppBuilder() {
       </section>
       
       <div className="w-full flex flex-col items-center mt-20 mb-20 px-6">
-        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-10 text-center tracking-tight">
-          Build Custom Application in Weeks
+        <h2 className="text-4xl md:text-5xl font-bold text-paradigm-blue mb-10 text-center tracking-tight">
+          Build a Custom App in Weeks
         </h2>
         
         <div className="max-w-4xl w-full bg-gray-50/80 backdrop-blur-sm border border-gray-100 rounded-3xl p-8 md:p-12 shadow-sm transition-all hover:shadow-md">
@@ -149,7 +149,7 @@ export function CustomAppBuilder() {
         <div className="w-3/4 max-w-4xl h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent opacity-60"></div>
       </div>
 
-      {/* Continuation Section: Create Custom Applications */}
+      {/* Continuation Section: Build a Custom App */}
       <section className="relative w-full py-24 md:py-32 overflow-hidden bg-[#fafafa]">
         {/* Subtle radial background glow - positioned differently */}
         <div 
@@ -178,7 +178,7 @@ export function CustomAppBuilder() {
               >
                 <img 
                   src="/vinyl-app-builder.png" 
-                  alt="Create Custom Applications Mockup" 
+                  alt="Build a Custom App Mockup" 
                   className="w-full h-auto object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.12)] hover:scale-[1.04] transition-transform duration-700 ease-out rounded-xl border border-gray-100/40"
                 />
               </motion.div>
@@ -193,7 +193,7 @@ export function CustomAppBuilder() {
                 transition={{ duration: 0.7, ease: "easeOut" }}
               >
                 <h3 className="text-sm md:text-base font-bold tracking-widest text-[#60a5fa] uppercase mb-4 relative inline-block group">
-                  Create Custom Applications
+                  Build a Custom App
                   <motion.span 
                     initial={{ scaleX: 0 }}
                     whileInView={{ scaleX: 1 }}
@@ -398,7 +398,7 @@ export function CustomAppBuilder() {
                 transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
                 className="text-[#a1a1aa] text-lg md:text-xl leading-relaxed max-w-[520px] mt-6 font-medium group hover:text-gray-400 transition-colors duration-500"
               >
-                Efficiently manage and track projects and tasks with our custom application. Designed to boost team visibility, efficiency, and productivity by customizing workflows to fit your needs, streamlining work for maximum productivity.
+                Efficiently manage and track projects and tasks with our custom app. Designed to boost team visibility, efficiency, and productivity by customizing workflows to fit your needs, streamlining work for maximum productivity.
               </motion.p>
 
               {/* Sub-block (Highlight Feature) */}
