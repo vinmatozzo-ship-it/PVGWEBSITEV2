@@ -1,20 +1,43 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Paradigm Venture Group Website
 
-# Run and deploy your AI Studio app
+Modern enterprise website developed for Paradigm Venture Group.
 
-This contains everything you need to run your app locally.
+## Overview
 
-View your app in AI Studio: https://ai.studio/apps/1fb82575-eda2-4e72-b261-2d3066a54e97
+This project is a responsive business website focused on enterprise interoperability, AI orchestration, workflow automation, and consulting services.
+
+The website includes:
+- Interoperable Solutions
+- Build a Custom App
+- AI Sales Ecosystem
+- AI Enterprise Ecosystem
+- Team Paradigm
+- Advisory Services
+- Media & Articles
+- Events
+- Responsive mobile support
+
+## Tech Stack
+
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- Framer Motion
+
+## Features
+
+- Fully responsive design
+- Modern enterprise UI
+- Animated sections and transitions
+- AI ecosystem presentation
+- Team and partner sections
+- Mobile-friendly navigation
+- Optimized layouts for desktop and mobile
 
 ## Run Locally
 
-**Prerequisites:**  Node.js
+Install dependencies:
 
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+```bash
+npm install
