@@ -77,7 +77,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
     try {
       // In a real scenario, make sure the backend is running on localhost:3001 
       // or use a relative path if proxied.
-      const response = await fetch("http://localhost:3001/api/contact", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         body: data,
       });
