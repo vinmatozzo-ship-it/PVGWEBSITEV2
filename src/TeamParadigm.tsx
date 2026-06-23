@@ -9,24 +9,7 @@ interface TeamParadigmProps {
   setIsContactModalOpen?: (open: boolean) => void;
 }
 
-// Custom hook to detect if hover is supported on the user's device
-function useHoverSupported() {
-  const [isHoverSupported, setIsHoverSupported] = React.useState(true);
 
-  React.useEffect(() => {
-    if (typeof window === "undefined") return;
-    const hoverMediaQuery = window.matchMedia("(hover: hover)");
-    setIsHoverSupported(hoverMediaQuery.matches);
-
-    const handleChange = (e: MediaQueryListEvent) => {
-      setIsHoverSupported(e.matches);
-    };
-    hoverMediaQuery.addEventListener("change", handleChange);
-    return () => hoverMediaQuery.removeEventListener("change", handleChange);
-  }, []);
-
-  return isHoverSupported;
-}
 
 const featuredMember = {
   name: "Vin Matozzo",
@@ -39,9 +22,9 @@ const featuredMember = {
 const team = [
   {
     name: "Adam Russin",
-    role: "SAAS Sales / SHIFT Business Dev Terzo, Krista",
+    role: "SAAS Sales / SHIFT Business Dev Krista",
     image: "/adam-rusin.jpg",
-    preview: "Adam leads SaaS sales and business development for SHIFT, Terzo, and Krista integrations.",
+    preview: "Adam leads SaaS sales and business development for SHIFT and Krista integrations.",
     extended: "He specializes in driving adoption of cloud architectures, workflow automation, and vendor management solutions across enterprise clients.",
     isPlaceholder: false
   },
@@ -63,7 +46,7 @@ const team = [
   },
   {
     name: "Ala Obeidat",
-    role: "Future Team Member",
+    role: "Team profile details coming soon",
     image: "",
     preview: "Profile details coming soon.",
     extended: "",
@@ -71,42 +54,32 @@ const team = [
   },
   {
     name: "Mike Seroka",
-    role: "Future Team Member",
-    image: "",
-    preview: "Profile details coming soon.",
-    extended: "",
-    isPlaceholder: true
+    role: "Healthcare Supply Chain and Strategic Sourcing Leader",
+    image: "/mike-seroka.png",
+    preview: "Mike is a healthcare supply chain and strategic sourcing leader with more than 15 years of experience supporting hospitals, health systems, and integrated delivery networks.",
+    extended: "Mike is a healthcare supply chain and strategic sourcing leader with more than 15 years of experience supporting integrated delivery networks (IDNs), academic medical centers (AMCs), and community hospitals.\n\nHis expertise includes strategic sourcing, physician engagement, purchased service audits, and the development of value analysis programs that drive measurable cost savings and operational efficiency. Mike has successfully led procurement transformation initiatives, policy development and team leadership reform across complex healthcare organizations.\n\nHe continuously leverages AI and automation tools to simplify and accelerate everyday tasks, enabling hospitals and healthcare providers to make faster decisions, improve operational performance, and uncover new opportunities for savings and innovation.",
+    isPlaceholder: false
   },
   {
-    name: "Adriana",
-    role: "Future Team Member",
-    image: "",
-    preview: "Profile details coming soon.",
-    extended: "",
-    isPlaceholder: true
+    name: "Adriana Garcia Del Cid",
+    role: "Executive Orchestrator, Paradigm Venture Group LLC",
+    image: "/adriana-garcia.jpg",
+    preview: "Adriana supports executive operations, scheduling, communications, partner coordination, and cross-functional follow-through for the Paradigm leadership team.",
+    extended: "Adriana Garcia Del Cid serves as Executive Orchestrator at Paradigm Venture Group LLC, where she supports executive operations, scheduling coordination, external communications, and cross-functional follow-through for the Paradigm leadership team. Her role is centered on keeping high-priority conversations, meetings, partner interactions, and operational details moving with clarity and precision.\n\nAs part of Paradigm’s executive layer, Adriana helps coordinate communications between internal stakeholders and external partners, ensuring that meetings are scheduled, follow-ups are handled, and key relationships remain organized.",
+    isPlaceholder: false
   }
 ];
 
 function FeaturedMemberCard({ member }: { member: typeof featuredMember }) {
   const [isExpanded, setIsExpanded] = React.useState(false);
-  const [isHovered, setIsHovered] = React.useState(false);
-  const isHoverSupported = useHoverSupported();
-
-  const showFull = isHoverSupported ? isHovered : isExpanded;
-
-  const handleMouseEnter = () => {
-    if (isHoverSupported) {
-      setIsHovered(true);
-    }
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-    setIsExpanded(false); // Reset both on mouse leave to prevent locking
-  };
 
   const handleClick = () => {
-    if (!isHoverSupported) {
+    setIsExpanded(!isExpanded);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
       setIsExpanded(!isExpanded);
     }
   };
@@ -114,15 +87,17 @@ function FeaturedMemberCard({ member }: { member: typeof featuredMember }) {
   return (
     <motion.div 
        layout
-       onMouseEnter={handleMouseEnter}
-       onMouseLeave={handleMouseLeave}
        onClick={handleClick}
+       onKeyDown={handleKeyDown}
+       tabIndex={0}
+       role="button"
+       aria-expanded={isExpanded}
        transition={{
          layout: { type: "tween", duration: 0.35, ease: [0.25, 1, 0.5, 1] }
        }}
-       className="bg-white border border-gray-100 rounded-[2rem] p-8 md:p-10 mb-8 flex flex-col md:flex-row gap-8 items-center md:items-start shadow-xl shadow-black/[0.03] relative overflow-hidden group cursor-pointer transition-[border-color,box-shadow] duration-300 ease-out"
+       className="bg-white border border-gray-100 rounded-[2rem] p-8 md:p-10 mb-8 flex flex-col md:flex-row gap-8 items-center md:items-start shadow-xl shadow-black/[0.03] relative overflow-hidden group cursor-pointer transition-[border-color,box-shadow] duration-300 ease-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
     >
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-r from-blue-50/50 to-transparent opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-300 pointer-events-none" />
       
       <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden bg-blue-50 border-4 border-white shadow-lg relative z-10 shrink-0 flex items-center justify-center">
         {member.image ? (
@@ -152,24 +127,24 @@ function FeaturedMemberCard({ member }: { member: typeof featuredMember }) {
         <motion.div 
           initial={false}
           animate={{ 
-            height: showFull ? "auto" : 0, 
-            opacity: showFull ? 1 : 0,
-            y: showFull ? 0 : -8
+            height: isExpanded ? "auto" : 0, 
+            opacity: isExpanded ? 1 : 0,
+            y: isExpanded ? 0 : -8
           }}
           transition={{
             height: { duration: 0.35, ease: [0.25, 1, 0.5, 1] },
-            opacity: { duration: 0.25, ease: "linear", delay: showFull ? 0.05 : 0 },
+            opacity: { duration: 0.25, ease: "linear", delay: isExpanded ? 0.05 : 0 },
             y: { duration: 0.3, ease: [0.25, 1, 0.5, 1] }
           }}
           className="overflow-hidden"
         >
-          <p className="text-gray-500 leading-relaxed font-medium text-sm md:text-base mt-2 pt-2 border-t border-gray-100/50">
+          <p className="text-gray-500 leading-relaxed font-medium text-sm md:text-base mt-2 pt-2 border-t border-gray-100/50 whitespace-pre-line">
             {member.extended}
           </p>
         </motion.div>
         
-        <div className="text-xs text-blue-500 font-black uppercase tracking-widest mt-4 opacity-60 group-hover:opacity-100 transition-opacity">
-          {showFull ? "Click/tap to show less" : isHoverSupported ? "Hover to read full biography" : "Tap to read full biography"}
+        <div className="text-xs text-blue-500 font-black uppercase tracking-widest mt-4 opacity-60 group-hover:opacity-100 group-focus:opacity-100 transition-opacity">
+          {isExpanded ? "Click/tap to collapse" : "Click/tap to expand"}
         </div>
       </div>
     </motion.div>
@@ -178,28 +153,20 @@ function FeaturedMemberCard({ member }: { member: typeof featuredMember }) {
 
 function TeamMemberCard({ member }: { member: typeof team[0] }) {
   const [isExpanded, setIsExpanded] = React.useState(false);
-  const [isHovered, setIsHovered] = React.useState(false);
-  const isHoverSupported = useHoverSupported();
 
   const getInitials = (name: string) => {
     return name.split(' ').map(n => n[0]).join('').toUpperCase();
   };
 
-  const showFull = isHoverSupported ? isHovered : isExpanded;
-
-  const handleMouseEnter = () => {
-    if (isHoverSupported) {
-      setIsHovered(true);
+  const handleClick = () => {
+    if (!member.isPlaceholder) {
+      setIsExpanded(!isExpanded);
     }
   };
 
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-    setIsExpanded(false); // Reset both on mouse leave to prevent locking
-  };
-
-  const handleClick = () => {
-    if (!isHoverSupported) {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (!member.isPlaceholder && (e.key === "Enter" || e.key === " ")) {
+      e.preventDefault();
       setIsExpanded(!isExpanded);
     }
   };
@@ -207,15 +174,21 @@ function TeamMemberCard({ member }: { member: typeof team[0] }) {
   return (
     <motion.div 
       layout
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
       onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      tabIndex={member.isPlaceholder ? -1 : 0}
+      role={member.isPlaceholder ? undefined : "button"}
+      aria-expanded={member.isPlaceholder ? undefined : isExpanded}
       transition={{
         layout: { type: "tween", duration: 0.35, ease: [0.25, 1, 0.5, 1] }
       }}
-      className="bg-white border border-gray-100 rounded-2xl p-6 flex flex-col items-center text-center hover:border-blue-200 hover:shadow-xl shadow-black/[0.02] relative overflow-hidden cursor-pointer h-full justify-between transition-[border-color,box-shadow] duration-300 ease-out"
+      className={`group bg-white border border-gray-100 rounded-2xl p-6 flex flex-col items-center text-center relative overflow-hidden h-full justify-between transition-[border-color,box-shadow] duration-300 ease-out ${
+        member.isPlaceholder 
+          ? "cursor-default" 
+          : "cursor-pointer hover:border-blue-200 hover:shadow-xl shadow-black/[0.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+      }`}
     >
-      <div className="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-transparent opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-300 pointer-events-none" />
       
       <div className="w-full flex flex-col items-center">
         <div className="w-24 h-24 rounded-full overflow-hidden bg-blue-50 border-[3px] border-white shadow-sm group-hover:border-blue-100 transition-colors flex items-center justify-center mb-5 shrink-0 relative z-10">
@@ -242,18 +215,18 @@ function TeamMemberCard({ member }: { member: typeof team[0] }) {
           <motion.div 
             initial={false}
             animate={{ 
-              height: showFull ? "auto" : 0, 
-              opacity: showFull ? 1 : 0,
-              y: showFull ? 0 : -8
+              height: isExpanded ? "auto" : 0, 
+              opacity: isExpanded ? 1 : 0,
+              y: isExpanded ? 0 : -8
             }}
             transition={{
               height: { duration: 0.35, ease: [0.25, 1, 0.5, 1] },
-              opacity: { duration: 0.25, ease: "linear", delay: showFull ? 0.05 : 0 },
+              opacity: { duration: 0.25, ease: "linear", delay: isExpanded ? 0.05 : 0 },
               y: { duration: 0.3, ease: [0.25, 1, 0.5, 1] }
             }}
             className="overflow-hidden w-full"
           >
-            <p className="text-xs text-gray-400 font-medium leading-relaxed mt-2 pt-2 border-t border-gray-100/50">
+            <p className="text-xs text-gray-400 font-medium leading-relaxed mt-2 pt-2 border-t border-gray-100/50 whitespace-pre-line text-left">
               {member.extended}
             </p>
           </motion.div>
@@ -262,8 +235,8 @@ function TeamMemberCard({ member }: { member: typeof team[0] }) {
 
       <div className="w-full flex justify-center mt-4">
         {!member.isPlaceholder ? (
-          <div className="text-[10px] text-blue-500 font-black uppercase tracking-wider opacity-60 group-hover:opacity-100 transition-opacity flex items-center gap-1">
-            {showFull ? "Show less" : isHoverSupported ? "Hover to expand" : "Tap to expand"}
+          <div className="text-[10px] text-blue-500 font-black uppercase tracking-wider opacity-60 group-hover:opacity-100 group-focus:opacity-100 transition-opacity flex items-center gap-1">
+            {isExpanded ? "Show less" : "Click/tap to expand"}
           </div>
         ) : (
           <div className="text-[10px] text-gray-400 font-black uppercase tracking-wider flex items-center gap-1">
@@ -279,7 +252,6 @@ export default function TeamParadigm({ setIsContactModalOpen }: TeamParadigmProp
   const partners = [
     "Data Leverage Group",
     "Krista",
-    "Terzo",
     "Evanston Technology Partners",
     "5S / Space Innovation",
     "Seal Shield",

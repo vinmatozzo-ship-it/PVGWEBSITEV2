@@ -102,7 +102,7 @@ export function CustomAppBuilder() {
                 className="relative"
               >
                 <img 
-                  src="/dashboard-mockup.png" 
+                  src="/dashboard-mockup-clean.jpg" 
                   alt="Responsive Dashboard Mockup" 
                   className="w-full h-auto object-contain drop-shadow-2xl hover:scale-[1.03] transition-transform duration-700 ease-out"
                 />
@@ -177,7 +177,7 @@ export function CustomAppBuilder() {
                 className="relative"
               >
                 <img 
-                  src="/vinyl-app-builder.png" 
+                  src="/vinyl-app-builder-clean.png" 
                   alt="Build a Custom App Mockup" 
                   className="w-full h-auto object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.12)] hover:scale-[1.04] transition-transform duration-700 ease-out rounded-xl border border-gray-100/40"
                 />

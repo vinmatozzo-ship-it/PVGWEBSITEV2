@@ -356,15 +356,11 @@ export default function App() {
                   transition={{ duration: 0.8, ease: "easeOut" }}
                   className="relative flex justify-center items-center w-full h-full"
                 >
-                  <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
+                  <img
+                    src="/overview-phone.jpg"
+                    alt="Paradigm interoperability platform mobile interface"
                     className="w-full h-auto object-contain"
-                  >
-                    <source src="/overview-video-new.mp4" type="video/mp4" />
-                  </video>
+                  />
                 </motion.div>
 
                 {/* Right: Text */}
