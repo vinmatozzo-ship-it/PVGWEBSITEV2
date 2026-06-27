@@ -316,7 +316,7 @@ export default function App() {
                   <div className="mt-8 flex items-center gap-8 text-gray-400 uppercase tracking-widest text-[10px] font-bold">
                     <div className="flex flex-col gap-1">
                       <span>PROJECTS</span>
-                      <span className="text-black">124+</span>
+                      <span className="text-black">1124+</span>
                     </div>
                     <div className="w-px h-8 bg-black/10" />
                     <div className="flex flex-col gap-1">

@@ -21,19 +21,19 @@ const featuredMember = {
 
 const team = [
   {
-    name: "Adam Russin",
+    name: "Adam Rusin",
     role: "SAAS Sales / SHIFT Business Dev Krista",
     image: "/adam-rusin.jpg",
-    preview: "Adam leads SaaS sales and business development for SHIFT and Krista integrations.",
-    extended: "He specializes in driving adoption of cloud architectures, workflow automation, and vendor management solutions across enterprise clients.",
+    preview: "Adam is a seasoned sales and business development executive with over 20 years of experience in healthcare technology and MedTech.",
+    extended: "Adam Rusin is a seasoned sales and business development executive with over 20 years of experience in healthcare technology and MedTech. At PVGUS, he leads growth strategy and enterprise partnerships, helping health systems streamline procurement and value analysis processes through innovative solutions. Adam is a certified Project Management Professional and recognized for his calm leadership and results driven approach.",
     isPlaceholder: false
   },
   {
     name: "Shawn Fleming",
     role: "Sales Dev and SHIFT / Supplier Partnerships",
     image: "/shawn-fleming.jpg",
-    preview: "Shawn focuses on sales development, SHIFT workflows, and supplier partnerships.",
-    extended: "He bridges the gap between supplier networks and enterprise procurement, optimizing inventory and supplier relationships.",
+    preview: "Shawn is a healthcare sales and strategic partnerships executive with more than two decades of experience spanning GPO/IDN contracting, SaaS commercialization, and supply chain optimization.",
+    extended: "Shawn Fleming is a healthcare sales and strategic partnerships executive with more than two decades of experience spanning GPO/IDN contracting, SaaS commercialization, and supply chain optimization. He previously held senior leadership roles at aptitude, LLC (a Vizient subsidiary), where he helped build healthcare's first online contracting marketplace from pre-launch to over $30 million in annual revenue, and later led enterprise-level legal operations reducing contract cycle times by more than 40%. At Paradigm, Shawn is focused on forging the strategic partnerships that drive growth across emerging and adjacent markets.",
     isPlaceholder: false
   },
   {
@@ -46,11 +46,11 @@ const team = [
   },
   {
     name: "Ala Obeidat",
-    role: "Team profile details coming soon",
-    image: "",
-    preview: "Profile details coming soon.",
-    extended: "",
-    isPlaceholder: true
+    role: "Operational Systems & AI Workflows",
+    image: "/ala-obeidat.jpg",
+    preview: "Ala works at the intersection of operational systems, AI-enabled workflows, and technical problem-solving.",
+    extended: "Ala Obeidat works at the intersection of operational systems, AI-enabled workflows, and technical problem-solving. His focus is on helping organizations improve operational clarity, reduce friction, and build scalable processes through thoughtful use of modern AI and automation tooling. At PVG, he supports workflow familiarization, operational optimization, and emerging technical initiatives across the organization’s evolving AI ecosystem.",
+    isPlaceholder: false
   },
   {
     name: "Mike Seroka",

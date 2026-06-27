@@ -1,6 +1,5 @@
 import { motion } from "motion/react";
 
-import { GooeyMarquee } from "./components/ui/gooey-marquee";
 import solutionsVideo from "./components/ui/hf_20260501_081848_87ec58cb-009a-4bc7-98ae-4f84aa84d5bf.mp4";
 import TiltCard from "./components/ui/3d-tilt-card";
 
@@ -8,7 +7,6 @@ export function Solutions() {
   return (
     <div className="pt-32 pb-20 px-6 min-h-screen">
       <div className="max-w-7xl mx-auto">
-        <GooeyMarquee text="Helping businesses thrive" className="mb-12" />
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
