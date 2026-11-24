@@ -6,7 +6,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 
-import { Menu, X, ArrowRight, ChevronDown, Instagram, Linkedin } from "lucide-react";
+import { Menu, X, ChevronDown, Instagram, Linkedin } from "lucide-react";
 
 import { Routes, Route, Link } from "react-router-dom";
 import { Solutions } from "./Solutions";
@@ -20,7 +20,8 @@ import { AdvisoryServices } from "./AdvisoryServices";
 import TeamParadigm from "./TeamParadigm";
 import Events from "./Events";
 import MediaAndArticles from "./MediaAndArticles";
-import { FridayOS } from "./components/ui/friday-os";
+import { useHeroNavigation } from "./components/hero/useHeroNavigation";
+import { HomeHero } from "./components/hero/HomeHero";
 import { AIEnterpriseEcosystem } from "./AIEnterpriseEcosystem";
 
 
@@ -62,6 +63,7 @@ const logos = [
 ];
 
 export default function App() {
+  const heroNavigation = useHeroNavigation();
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mobileDropdowns, setMobileDropdowns] = useState({
@@ -78,6 +80,20 @@ export default function App() {
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = "hidden";
+      const previous = document.activeElement as HTMLElement | null;
+      const menu = document.getElementById('pvg-mobile-menu');
+      menu?.querySelector<HTMLButtonElement>('[aria-label="Close menu"]')?.focus();
+      const keydown = (event: KeyboardEvent) => {
+        if (event.key === 'Escape') { event.preventDefault(); setIsMobileMenuOpen(false); }
+        if (event.key === 'Tab' && menu) {
+          const focusable = Array.from(menu.querySelectorAll<HTMLElement>('a,button')).filter(el => !el.closest('[inert]') && el.getClientRects().length > 0);
+          const first = focusable[0], last = focusable[focusable.length - 1];
+          if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+          else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+        }
+      };
+      document.addEventListener('keydown', keydown);
+      return () => { document.body.style.overflow = 'unset'; document.removeEventListener('keydown', keydown); previous?.focus({ preventScroll: true }); };
     } else {
       document.body.style.overflow = "unset";
     }
@@ -91,7 +107,7 @@ export default function App() {
       <ScrollToTop />
       <ContactModal isOpen={isContactModalOpen} onClose={() => setIsContactModalOpen(false)} />
 
-      <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[95vw] z-50 flex items-center px-8 py-3 bg-[rgba(255,255,255,0.4)] backdrop-blur-[32px] backdrop-saturate-[180%] border border-[rgba(255,255,255,0.6)] shadow-[0_12px_40px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.6),inset_0_-1px_0_rgba(255,255,255,0.2)] rounded-[36px]">
+      <nav data-hero-home={heroNavigation.home} data-hero-dark={heroNavigation.dark} className="pvg-navigation fixed top-4 left-1/2 -translate-x-1/2 w-[95vw] z-50 flex items-center px-8 py-3 bg-[rgba(255,255,255,0.4)] backdrop-blur-[32px] backdrop-saturate-[180%] border border-[rgba(255,255,255,0.6)] shadow-[0_12px_40px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.6),inset_0_-1px_0_rgba(255,255,255,0.2)] rounded-[36px]">
         <div className="flex-shrink-0 pl-4">
           <Link to="/" className="block group">
             <img src="/logo.png" alt="Paradigm Venture Group" className="h-16 w-auto group-hover:opacity-80 transition-opacity" />
@@ -174,6 +190,7 @@ export default function App() {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="p-2 text-black transition-opacity hover:opacity-70 focus:outline-none"
             aria-label="Toggle menu"
+            aria-expanded={isMobileMenuOpen} aria-controls="pvg-mobile-menu"
           >
             {isMobileMenuOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
           </button>
@@ -181,7 +198,7 @@ export default function App() {
       </nav>
 
       {/* Mobile Navigation Menu */}
-      <div
+      <div id="pvg-mobile-menu" data-hero-dark={heroNavigation.dark} inert={!isMobileMenuOpen} aria-hidden={!isMobileMenuOpen}
         className={cn(
           "fixed inset-0 bg-white z-[60] xl:hidden flex flex-col overflow-y-auto transition-transform duration-500 ease-in-out",
           isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
@@ -204,13 +221,14 @@ export default function App() {
           {/* Solutions */}
           <div className="flex flex-col border-b border-gray-100 pb-4">
             <button
+              aria-expanded={mobileDropdowns.solutions}
               onClick={() => toggleMobileDropdown('solutions')}
               className="flex items-center justify-between font-extrabold text-lg tracking-wide uppercase focus:outline-none"
             >
               Interoperable Solutions
               <ChevronDown className={cn("w-6 h-6 transition-transform duration-300", mobileDropdowns.solutions ? "rotate-180" : "")} />
             </button>
-            <div className={cn("flex flex-col overflow-hidden transition-all duration-300", mobileDropdowns.solutions ? "mt-4 max-h-[400px]" : "max-h-0")}>
+            <div inert={!mobileDropdowns.solutions} className={cn("flex flex-col overflow-hidden transition-all duration-300", mobileDropdowns.solutions ? "mt-4 max-h-[400px]" : "max-h-0")}>
               <Link to="/solutions" onClick={() => setIsMobileMenuOpen(false)} className="py-2 text-base font-bold text-gray-500 hover:text-blue-600">Solutions Overview</Link>
               <Link to="/custom-app-builder" onClick={() => setIsMobileMenuOpen(false)} className="py-2 text-base font-bold text-gray-500 hover:text-blue-600">Build a Custom App</Link>
               <Link to="/ai-sales-ecosystem" onClick={() => setIsMobileMenuOpen(false)} className="py-2 text-base font-bold text-gray-500 hover:text-blue-600">AI-Powered Sales Ecosystem</Link>
@@ -221,13 +239,14 @@ export default function App() {
           {/* Consulting Services */}
           <div className="flex flex-col border-b border-gray-100 pb-4">
             <button
+              aria-expanded={mobileDropdowns.consulting}
               onClick={() => toggleMobileDropdown('consulting')}
               className="flex items-center justify-between font-extrabold text-lg tracking-wide uppercase focus:outline-none"
             >
               Consulting Services
               <ChevronDown className={cn("w-6 h-6 transition-transform duration-300", mobileDropdowns.consulting ? "rotate-180" : "")} />
             </button>
-            <div className={cn("flex flex-col overflow-hidden transition-all duration-300", mobileDropdowns.consulting ? "mt-4 max-h-[400px]" : "max-h-0")}>
+            <div inert={!mobileDropdowns.consulting} className={cn("flex flex-col overflow-hidden transition-all duration-300", mobileDropdowns.consulting ? "mt-4 max-h-[400px]" : "max-h-0")}>
               <Link to="/advisory-services" onClick={() => setIsMobileMenuOpen(false)} className="py-2 text-base font-bold text-gray-500 hover:text-blue-600">Advisory Services</Link>
             </div>
           </div>
@@ -235,13 +254,14 @@ export default function App() {
           {/* About Paradigm */}
           <div className="flex flex-col border-b border-gray-100 pb-4">
             <button
+              aria-expanded={mobileDropdowns.about}
               onClick={() => toggleMobileDropdown('about')}
               className="flex items-center justify-between font-extrabold text-lg tracking-wide uppercase focus:outline-none"
             >
               About Paradigm
               <ChevronDown className={cn("w-6 h-6 transition-transform duration-300", mobileDropdowns.about ? "rotate-180" : "")} />
             </button>
-            <div className={cn("flex flex-col overflow-hidden transition-all duration-300", mobileDropdowns.about ? "mt-4 max-h-[400px]" : "max-h-0")}>
+            <div inert={!mobileDropdowns.about} className={cn("flex flex-col overflow-hidden transition-all duration-300", mobileDropdowns.about ? "mt-4 max-h-[400px]" : "max-h-0")}>
               <Link to="/team-paradigm" onClick={() => setIsMobileMenuOpen(false)} className="py-2 text-base font-bold text-gray-500 hover:text-blue-600">Team Paradigm</Link>
               <Link to="/events" onClick={() => setIsMobileMenuOpen(false)} className="py-2 text-base font-bold text-gray-500 hover:text-blue-600">Events</Link>
             </div>
@@ -250,13 +270,14 @@ export default function App() {
           {/* Newsworthy */}
           <div className="flex flex-col border-b border-gray-100 pb-4">
             <button
+              aria-expanded={mobileDropdowns.newsworthy}
               onClick={() => toggleMobileDropdown('newsworthy')}
               className="flex items-center justify-between font-extrabold text-lg tracking-wide uppercase focus:outline-none"
             >
               Newsworthy
               <ChevronDown className={cn("w-6 h-6 transition-transform duration-300", mobileDropdowns.newsworthy ? "rotate-180" : "")} />
             </button>
-            <div className={cn("flex flex-col overflow-hidden transition-all duration-300", mobileDropdowns.newsworthy ? "mt-4 max-h-[400px]" : "max-h-0")}>
+            <div inert={!mobileDropdowns.newsworthy} className={cn("flex flex-col overflow-hidden transition-all duration-300", mobileDropdowns.newsworthy ? "mt-4 max-h-[400px]" : "max-h-0")}>
               <Link to="/media-and-articles" onClick={() => setIsMobileMenuOpen(false)} className="py-2 text-base font-bold text-gray-500 hover:text-blue-600">Media and Articles</Link>
             </div>
           </div>
@@ -277,73 +298,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={
           <>
-            {/* Hero Section */}
-            <main className="relative pt-32 pb-20 px-6 min-h-screen flex items-center overflow-hidden">
-              <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                {/* Left Content */}
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
-                  className="flex flex-col gap-6 relative z-10"
-                >
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/5 border border-black/10 text-xs font-bold text-black w-fit">
-                    <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-black opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-black"></span>
-                    </span>
-                    NEW: GPT-5 READINESS AUDIT
-                  </div>
-
-                  <h1 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-[0.9] text-balance">
-                    Interoperability<br />
-                    <span className="text-paradigm-blue">
-                      as a service.
-                    </span>
-                  </h1>
-
-                  <p className="text-xl md:text-2xl text-gray-600 max-w-lg leading-relaxed font-medium">
-                    Seamlessly connect your data, systems, and teams. We build intelligent integrations that eliminate silos and accelerate your business growth.
-                  </p>
-
-                  <div className="flex flex-col sm:flex-row gap-4 mt-4">
-                    <button onClick={() => setIsContactModalOpen(true)} className="group bg-black text-white px-8 py-4 rounded-full text-lg font-bold flex items-center justify-center gap-2 hover:bg-gray-800 transition-all hover:pr-6 active:scale-95 shadow-xl shadow-black/20">
-                      Contact Us
-                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    </button>
-                  </div>
-
-                  <div className="mt-8 flex items-center gap-8 text-gray-400 uppercase tracking-widest text-[10px] font-bold">
-                    <div className="flex flex-col gap-1">
-                      <span>PROJECTS</span>
-                      <span className="text-black">1124+</span>
-                    </div>
-                    <div className="w-px h-8 bg-black/10" />
-                    <div className="flex flex-col gap-1">
-                      <span>CLIENTS</span>
-                      <span className="text-black">GLOBAL</span>
-                    </div>
-                    <div className="w-px h-8 bg-black/10" />
-                    <div className="flex flex-col gap-1">
-                      <span>TRUST</span>
-                      <span className="text-black">100%</span>
-                    </div>
-                  </div>
-                </motion.div>
-
-                {/* Right Space with Hero Visual */}
-                <div className="hidden lg:flex relative h-full w-full items-center justify-center overflow-hidden translate-x-4">
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1.5, delay: 0.4, ease: "easeOut" }}
-                    className="w-full h-[750px] relative rounded-3xl overflow-hidden shadow-2xl shadow-black/10 ring-1 ring-black/5 bg-white p-4"
-                  >
-                    <FridayOS />
-                  </motion.div>
-                </div>
-              </div>
-            </main>
+            <HomeHero onContact={() => setIsContactModalOpen(true)} obscured={isMobileMenuOpen || isContactModalOpen} />
 
             {/* Overview Video Section */}
             <section className="relative mx-auto max-w-7xl pt-32 pb-10 px-6">
